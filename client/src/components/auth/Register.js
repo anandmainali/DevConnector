@@ -1,6 +1,36 @@
 import React, { Component } from "react";
 
 class Register extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+      password2: "",
+      errors: ""
+    };
+  }
+
+  inputHandler = e => {
+    return this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  formSubmitHandler = e => {
+    e.preventDefault();
+
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2
+    };
+
+    console.log(newUser);
+  };
+
   render() {
     return (
       <div className="register">
@@ -11,14 +41,15 @@ class Register extends Component {
               <p className="lead text-center">
                 Create your DevConnector account
               </p>
-              <form action="create-profile.html">
+              <form onSubmit={this.formSubmitHandler}>
                 <div className="form-group">
                   <input
                     type="text"
                     className="form-control form-control-lg"
                     placeholder="Name"
                     name="name"
-                    required
+                    value={this.state.name}
+                    onChange={this.inputHandler}
                   />
                 </div>
                 <div className="form-group">
@@ -27,8 +58,10 @@ class Register extends Component {
                     className="form-control form-control-lg"
                     placeholder="Email Address"
                     name="email"
+                    value={this.state.email}
+                    onChange={this.inputHandler}
                   />
-                  <small classNameName="form-text text-muted">
+                  <small className="form-text text-muted">
                     This site uses Gravatar so if you want a profile image, use
                     a Gravatar email
                   </small>
@@ -39,6 +72,8 @@ class Register extends Component {
                     className="form-control form-control-lg"
                     placeholder="Password"
                     name="password"
+                    value={this.state.password}
+                    onChange={this.inputHandler}
                   />
                 </div>
                 <div className="form-group">
@@ -47,6 +82,8 @@ class Register extends Component {
                     className="form-control form-control-lg"
                     placeholder="Confirm Password"
                     name="password2"
+                    value={this.state.password2}
+                    onChange={this.inputHandler}
                   />
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
