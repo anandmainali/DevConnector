@@ -28,6 +28,9 @@ class CreateProfile extends Component {
       instagram: "",
       errors: {}
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -248,4 +251,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(withRouter(CreateProfile));
+export default connect(
+  mapStateToProps,
+  { createProfile }
+)(withRouter(CreateProfile));
